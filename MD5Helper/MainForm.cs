@@ -19,6 +19,9 @@ namespace MD5Helper
         private const String bExit = "Exit";
         readonly String filepath;
 
+        // The volatile keyword indicates that a field can be modified in the program by something such as the operating system, the hardware, or a concurrently executing thread.
+        // Source: http://msdn.microsoft.com/en-us/library/x13ttww7(v=vs.71).aspx
+        // The important part of this is where it says "concurrently executing thread", because that's exactly what is happening.
         volatile SplashForm splash;
 
         public MainForm()
@@ -68,6 +71,10 @@ namespace MD5Helper
 
         void SetupControls(HashingEventArgs e)
         {
+            // I'm not entirely sure why I'm creating controls by hand.
+            // Though it likely has something to do some initial error with cross-thread access.
+            // At this point though, it's probably safe to do all this in the designer, but I'm leaving it this way because it works.
+
             this.Visible = true;
             String md5_hash = e.ChecksumValue;
 

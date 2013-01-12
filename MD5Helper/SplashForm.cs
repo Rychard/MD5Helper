@@ -20,6 +20,7 @@ namespace MD5Helper
         public HashingStatusUpdateEventArgs DisplayedStatus;
         public DateTime DateOfStatus;
 
+        // TODO: This should optimally be pulled from a configuration file.
         const long bufferSize = 131072; // 128 KB
         //const long bufferSize = 8388608; // 8192 KB
 
@@ -117,6 +118,7 @@ namespace MD5Helper
             {
                 // I can't think of a single reason why it would still be null...
                 // But just in case, let's handle it.
+                // NOTE: I realize this is a very poor way of "handling" exceptions.
                 Application.Exit();
             }
 
@@ -134,7 +136,8 @@ namespace MD5Helper
                     currentLength = (int)length;
                 }
                 offset += MD5Hasher.TransformBlock(buffer, 0, currentLength, buffer, 0);
-                update = new HashingStatusUpdateEventArgs(Math.Round((fs.Position / onePercent), 2), fs.Length, fs.Position);
+                double percentComplete = Math.Round((fs.Position / onePercent), 2);
+                update = new HashingStatusUpdateEventArgs(percentComplete, fs.Length, fs.Position);
                 HashingStatusUpdate(this, update);
             }
             fs.Close();
