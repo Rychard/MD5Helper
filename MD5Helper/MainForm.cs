@@ -30,7 +30,9 @@ namespace MD5Helper
             if (args.Length > 1)
             {
                 filepath = args[1];
-            } else {
+            } 
+            else 
+            {
                 const String msg = "Right-Click on a file and select 'Calculate md5'.";
                 MessageBox.Show(msg, "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 Application.Exit();
@@ -72,7 +74,7 @@ namespace MD5Helper
         void SetupControls(HashingEventArgs e)
         {
             // I'm not entirely sure why I'm creating controls by hand.
-            // Though it likely has something to do some initial error with cross-thread access.
+            // Though it likely has something to do with some initial error regarding cross-thread access.
             // At this point though, it's probably safe to do all this in the designer, but I'm leaving it this way because it works.
 
             this.Visible = true;
