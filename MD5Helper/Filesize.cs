@@ -4,12 +4,14 @@ namespace MD5Helper
 {
     public class FileSize
     {
-        private readonly long _totalBytes;
-        private readonly double _bytes;
-        private readonly double _kilobytes;
-        private readonly double _megabytes;
-        private readonly double _gigabytes;
-        private readonly double _terabytes;
+        private static readonly String[] Sizes = { "B", "KB", "MB", "GB", "TB" };
+
+        private readonly Int64 _totalBytes;
+        private readonly Double _bytes;
+        private readonly Double _kilobytes;
+        private readonly Double _megabytes;
+        private readonly Double _gigabytes;
+        private readonly Double _terabytes;
 
         public FileSize(long bytes)
         {
@@ -87,6 +89,23 @@ namespace MD5Helper
             if (TotalMegabytes > 1) { return Math.Round(TotalMegabytes, 1) + "MB"; }
             if (TotalKilobytes > 1) { return Math.Round(TotalKilobytes, 1) + "KB"; }
             return TotalBytes + "B";
+        }
+
+
+        
+        private static String GetHumanReadableFileSize(Int64 bytes)
+        {
+            // Source: https://stackoverflow.com/a/281679/1187982
+            Double len = bytes;
+            Int64 magnitude = 0;
+            while (len >= 1024 && magnitude + 1 < Sizes.Length)
+            {
+                magnitude++;
+                len = len / 1024;
+            }
+
+            // Adjust the format String to your preferences. For example "{0:0.#}{1}" would show a single decimal place, and no space.
+            return String.Format("{0:0.00} {1}", len, Sizes[magnitude]);
         }
     }
 }

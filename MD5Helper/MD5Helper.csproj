@@ -67,6 +67,7 @@
     <Compile Include="Filesize.cs" />
     <Compile Include="HashingEventArgs.cs" />
     <Compile Include="HashingStatusUpdateEventArgs.cs" />
+    <Compile Include="IHashCalculator.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
